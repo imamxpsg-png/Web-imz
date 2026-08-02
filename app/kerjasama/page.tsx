@@ -9,7 +9,7 @@ import { ArrowLeft, Handshake, Mail } from "lucide-react";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Proteksi agar Vercel tidak mogok/error saat mendeteksi string kosong selama proses build statis
+// Proteksi inisialisasi agar proses build di Vercel tidak error statis
 const supabase = supabaseUrl && supabaseAnonKey 
   ? createClient(supabaseUrl, supabaseAnonKey) 
   : null;
@@ -25,7 +25,7 @@ export default function KerjasamaPage() {
     setLoading(true);
     setStatus("");
 
-    // Validasi sistem jika variabel lingkungan di Vercel lupa dikonfigurasi
+    // Validasi jika token API Supabase belum terbaca di sisi client
     if (!supabase) {
       setStatus("Gagal mengirim: Konfigurasi API database di server Vercel belum lengkap.");
       setLoading(false);
@@ -57,7 +57,7 @@ export default function KerjasamaPage() {
 
   return (
     <div className="w-screen min-h-screen bg-zinc-950 text-white flex flex-col justify-center items-center p-4 sm:p-6" suppressHydrationWarning>
-      {/* Tombol kembali yang posisinya disesuaikan agar pas di layar HP dan tidak menumpuk */}
+      {/* Container tombol kembali disesuaikan agar responsif di HP */}
       <div className="w-full max-w-xl mb-4 sm:absolute sm:top-8 sm:left-8 flex justify-start">
         <Link href="/" className="flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-white border border-zinc-800/80 bg-zinc-900/40 backdrop-blur-md px-4 py-2 rounded-xl transition-all cursor-pointer">
           <ArrowLeft size={14} /> KEMBALI KE BERANDA
