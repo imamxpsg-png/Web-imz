@@ -88,10 +88,10 @@ return (
 
 <footer className="relative z-10 w-full max-w-7xl mx-auto px-6 border-t border-zinc-800/40 pt-6 mt-auto">
 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center text-center text-[11px] md:text-xs font-bold text-zinc-200">
-<div className="flex flex-col items-center"><Cpu className="text-purple-400 mb-1" /><span>ROBOTICS AI</span></div>
-<div className="flex flex-col items-center"><Award className="text-pink-400 mb-1" /><span className="max-w-[160px] text-center leading-tight">NANYANG TECHNOLOGICAL UNIVERSITY</span></div>
-<div className="flex flex-col items-center"><Globe className="text-amber-400 mb-1" /><span>GIVERY JAPAN</span></div>
-<div className="flex flex-col items-center"><ShieldCheck className="text-emerald-400 mb-1" /><span>SINGAPURA DEVELOPED</span></div>
+<div className="flex flex-col items-center"><Cpu className="text-purple-400 mb-1" /><span>Web Develops</span></div>
+<div className="flex flex-col items-center"><Award className="text-pink-400 mb-1" /><span className="max-w-[160px] text-center leading-tight">SMKN 2 SALATIGA</span></div>
+<div className="flex flex-col items-center"><Globe className="text-amber-400 mb-1" /><span>IMZ</span></div>
+<div className="flex flex-col items-center"><ShieldCheck className="text-emerald-400 mb-1" /><span>IMZ DEVELOPED</span></div>
 </div>
 </footer>
 </section>
