@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
-import { ArrowLeft, Handshake, Mail, Send } from "lucide-react";
+import { ArrowLeft, Handshake, Mail } from "lucide-react";
 
-const supabase = createClient(
-  "NEXT_PUBLIC_SUPABASE_URL=https://nyeefpzdxmuvitjpypaz.supabase.co", 
-  "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_3S5uTekbJ_8v0AoVDQ3lwQ_iW-ehfIp"
-);
+// Perbaikan inisialisasi menggunakan environment variables agar Vercel tidak error saat build
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function KerjasamaPage() {
   const [namaMitra, setNamaMitra] = useState("");
@@ -23,17 +23,24 @@ export default function KerjasamaPage() {
 
     const teksGabungan = `[MITRA: ${namaMitra}] - ${proposal}`;
 
-    const { error } = await supabase
-      .from("pesan_masuk")
-      .insert([{ isi_pesan: teksGabungan, tipe: "kerjasama" }]);
-    
-    setLoading(false);
-    if (!error) {
-      setStatus("Pengajuan kerjasama berhasil dikirim ke sistem IMZ!");
-      setNamaMitra("");
-      setProposal("");
-    } else {
-      setStatus("Gagal mengirim pengajuan.");
+    try {
+      const { error } = await supabase
+        .from("pesan_masuk")
+        .insert([{ isi_pesan: teksGabungan, tipe: "kerjasama" }]);
+      
+      if (!error) {
+        setStatus("Pengajuan kerjasama berhasil dikirim ke sistem IMZ!");
+        setNamaMitra("");
+        setProposal("");
+      } else {
+        console.error("Supabase Error:", error.message);
+        setStatus(`Gagal mengirim pengajuan: ${error.message}`);
+      }
+    } catch (err: any) {
+      console.error("Network Error:", err);
+      setStatus("Gagal mengirim karena masalah koneksi.");
+    } finally {
+      setLoading(false);
     }
   };
 
