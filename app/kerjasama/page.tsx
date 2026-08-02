@@ -6,8 +6,8 @@ import Link from "next/link";
 import { ArrowLeft, Handshake, Mail, Send } from "lucide-react";
 
 const supabase = createClient(
-  "https://supabase.co", 
-  "sb_publishable_3S5uTekbJ_8v0AoVDQ3lwQ_iW-ehfIp"
+  "NEXT_PUBLIC_SUPABASE_URL=https://nyeefpzdxmuvitjpypaz.supabase.co", 
+  "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_3S5uTekbJ_8v0AoVDQ3lwQ_iW-ehfIp"
 );
 
 export default function KerjasamaPage() {
